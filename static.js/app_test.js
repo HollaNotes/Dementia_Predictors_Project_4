@@ -44,12 +44,14 @@ function init() {
 
     });
     vis1()
+    vis2()
 }
 
 // Option changed
 function optionChanged(value) {
     console.log(value);
-    vis1(value)
+    vis1(value);
+    vis2(value);
 
 };
 
@@ -63,35 +65,26 @@ function vis1(selectedDementiaStatus) {
     } else {
         filteredData = data;
     }
-    // Initialized arrays
-    let condition_count = 0
-    let total = 0
-    let dementia_status = ["Demented", "Not Demented"]
-    let chronic_health_condition = ["Diabetes", "Heart Disease", "Hypertension", "None"]
-
-    // For loop to populate arrays
-    for (let i = 0; i < data.length; i++) {
-        row = data[i];
-        chronic_health_condition.push(row.Chronic_Health_Conditions);
-        dementia_status.push(row.Dementia)
-        if (row.Chronic_Health_Conditions == chronic_health_condition){
-            condition_count += 1;            
-        }
-       
-      
-
-    }
-
+    // Extract cognitive test scores from the filtered data
     let Cognitive_Test_Scores = filteredData.map(object => parseFloat(object.Cognitive_Test_Scores));
-    let MRI_Delay = filteredData.map(object => parseFloat(object.MRI_Delay));
-    let Age = filteredData.map(object => parseFloat(object.Age));
+    
+    // Count occurances of each score
+    let count_scores = {};
+    Cognitive_Test_Scores.forEach(score => {
+        count_scores[score] = (count_scores[score] || 0) + 1;
+    });
+
+    // Convert to arrays
+    let scoresArray = Object.keys(count_scores).map(score => parseFloat(score));
+    let countsArray = Object.values(count_scores);
+
 
     // Create trace for Plotly with custom hover text
     var trace1 = {
-        x: chronic_health_condition,
-        y: Age.slice(0, 10).reverse(),
+        x: scoresArray,
+        y: countsArray,
         text: Cognitive_Test_Scores, // Set custom hover text
-        hoverinfo: "text+x+y",  // Show custom text and x-value in hover info
+        hoverinfo: "x+y",  // Show custom text and x-value in hover info
         type: 'bar'
     };
 
@@ -100,7 +93,7 @@ function vis1(selectedDementiaStatus) {
 
     // Apply a title to the layout and add axis labels
     let layout = {
-        title: "VISUALIZATION 1",
+        title: "Cognitive Scores - Demented vs. Non-Demented",
         margin: {
             l: 100,
             r: 100,
@@ -111,10 +104,10 @@ function vis1(selectedDementiaStatus) {
             family: "Arial, sans-serif"
         },
         xaxis: {
-            title: 'Chronic Health Condition'
+            title: 'Cognitive Test Scores'
         },
         yaxis: {
-            title: 'Age'
+            title: 'Count'
         }
     };
 
@@ -122,43 +115,61 @@ function vis1(selectedDementiaStatus) {
     Plotly.newPlot("vis1", plotData, layout);
 }
 
-// function vis1() {
-//     let Cognitive_Test_Scores = data.map(object => parseFloat(object.Cognitive_Test_Scores));
-//     let MRI_Delay = data.map(object => parseFloat(object.MRI_Delay));
-//     let Age = data.map(object => parseFloat(object.Age));
 
-//     // Create trace for Plotly with custom hover text
-//     var trace1 = {
-//         x: Cognitive_Test_Scores.slice(0,20).reverse(),
-//         y: Age.slice(0,10).reverse(),
-//         text: Cognitive_Test_Scores, // Set custom hover text
-//         hoverinfo: "text+x+y",  // Show custom text and x-value in hover info
-//         type: 'bar'
-//     };
+function vis2(selectedDementiaStatus) {
+    // Filter data based on selectedDementiaStatus
+    let filteredData;
+    if (selectedDementiaStatus !== undefined) {
+        filteredData = data.filter(d => d.Dementia === +selectedDementiaStatus);
+    } else {
+        filteredData = data;
+    }
+    // Extract cognitive test scores from the filtered data
+    let Depression_Status = filteredData.map(object => object.Depression_Status);
+    
+    // Count occurances of each score
+    let count_statuses = {};
+    Depression_Status.forEach(status => {
+        count_statuses[status] = (count_statuses[status] || 0) + 1;
+    });
 
-//     // Data array
-//     let plotData = [trace1];
+    // Convert to arrays
+    let statusesArray  = Object.keys(count_statuses);
+    let countsArray  = Object.values(count_statuses);
 
-//     // Apply a title to the layout and add axis labels
-//     let layout = {
-//         title: "Scatter Plot",
-//         margin: {
-//             l: 100,
-//             r: 100,
-//             t: 100,
-//             b: 100
-//         },
-//         font: {
-//             family: "Arial, sans-serif"
-//         },
-//         xaxis: {
-//             title: 'Cognitive Test Scores' 
-//         },
-//         yaxis: {
-//             title: 'Age' 
-//         }
-//     };
 
-//     // Update the existing graph or create a new one
-//     Plotly.newPlot("vis1", plotData, layout);
-// }
+    // Create trace for Plotly with custom hover text
+    var trace1 = {
+        x: statusesArray,
+        y: countsArray,
+        text: Depression_Status, // Set custom hover text
+        hoverinfo: "x+y",  // Show custom text and x-value in hover info
+        type: 'bar'
+    };
+
+    // Data array
+    let plotData = [trace1];
+
+    // Apply a title to the layout and add axis labels
+    let layout = {
+        title: "Depression Status - Demented vs. Non-Demented",
+        margin: {
+            l: 100,
+            r: 100,
+            t: 100,
+            b: 100
+        },
+        font: {
+            family: "Arial, sans-serif"
+        },
+        xaxis: {
+            title: 'Depression'
+        },
+        yaxis: {
+            title: 'Count'
+        }
+    };
+
+    // Update the existing graph or create a new one
+    Plotly.newPlot("vis2", plotData, layout);
+}
