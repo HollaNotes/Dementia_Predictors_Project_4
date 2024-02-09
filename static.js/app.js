@@ -125,10 +125,10 @@ function optionChangedData(value) {
 function optionChangedGroup(value) {
     console.log(value);
 
-    // Filter data2 based on the selected group value
+    // Filter data2 based on selected group value
     const filteredData = data2.filter(d => d.Group === value);
 
-    // Update the scatter plot with the filtered data
+    // Update the scatter plot with filtered data
     updateScatter(filteredData);
 }
 
