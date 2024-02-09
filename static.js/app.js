@@ -13,7 +13,7 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
     // Assign csvData2 to the global data variable
     data2 = csvData2;
 
-    // Initialize the dropdown menu for Data 2 (Group)
+    // Initialize the dropdown menu for Data 2 
     initGroupDropdown();
 
     // Fetch CSV data from the first URL
@@ -37,7 +37,7 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
         // Assign csvData to the global data variable
         data = csvData;
 
-        // Initialize the dropdown menu for Data 1 (Dementia)
+        // Initialize the dropdown menu for Data 1 
         init();
 
         // Call the updateScatter function after data is loaded
@@ -48,7 +48,7 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
     });
 });
 
-// Dropdown menu for Data 1 (Dementia)
+// Dropdown menu for Data 1 
 function init() {
     // Get unique values from the "Dementia" column in data
     let uniqueDementiaStatusData = [...new Set(data.map(d => d.Dementia))];
@@ -89,7 +89,7 @@ function init() {
     });
 }
 
-// Dropdown menu for Data 2 (Group)
+// Dropdown menu for Data 2 
 function initGroupDropdown() {
     // Get unique values from the "Group" column in data2
     let uniqueGroups = [...new Set(data2.map(d => d.Group))];
@@ -114,25 +114,25 @@ function initGroupDropdown() {
     });
 }
 
-// Option changed for Data 1 (Dementia)
+// Option changed for Data 1 
 function optionChangedData(value) {
     console.log(value);
     vis1(value);
     vis2(value);
 };
 
-// Option changed for Data 2 (Group)
+// Option changed for Data 2 
 function optionChangedGroup(value) {
     console.log(value);
 
-    // Filter data2 based on the selected group value
+    // Filter data2 based on selected group value
     const filteredData = data2.filter(d => d.Group === value);
 
-    // Update the scatter plot with the filtered data
+    // Update the scatter plot with filtered data
     updateScatter(filteredData);
 }
 
-// Scatter plot update function
+
 // Scatter plot update function
 function updateScatter(filteredData) {
     // Select the container for the scatter plot
@@ -141,7 +141,7 @@ function updateScatter(filteredData) {
     // Clear any existing content 
     scatterContainer.html("");
 
-    // Get CDR scores and ages from all data
+    // Get CDR scores and ages from dataset
     const cdrScores = data2.map(d => d.CDR);
     const ages = data2.map(d => d.Age);
 
@@ -156,7 +156,8 @@ function updateScatter(filteredData) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
+
+    // Add title    
     svg.append("text")
         .attr("x", (width / 2))
         .attr("y", 0 - (margin.top / 2))
@@ -219,7 +220,7 @@ function updateScatter(filteredData) {
             .attr("cx", d => xScale(d.Age))
             .attr("cy", d => yScale(d.CDR))
             .attr("r", 5)
-            .style("fill", "purple");  // Set the color for selected data points, you can customize this
+            .style("fill", "purple");  
     }
 }
 
