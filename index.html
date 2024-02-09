@@ -24,23 +24,41 @@
         <img src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjc4LTE3Ni14LmpwZw.jpg" width="200" height="200" alt="Dementia Dashboard Image">
       </div>
     </div>
+
     <div class="row">
+      <!-- Data 2 Options -->
       <div class="col-md-2">
         <div class="well">
-          <h5>Dementia Status:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          <h5>Group (Data 2):</h5>
+          <select id="selDatasetGroup" onchange="optionChangedGroup(this.value)"></select>
         </div>
       </div>
+
+      <!-- Scatter Plot for Data 2 -->
       <div class="col-md-5">
-        <div id="insert chart here"></div>
-      </div>
-      <div class="col-md-5">
-        <div id=""></div>
+        <div id="scatter"></div>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-md-12">
-        <div id="insert chart here"></div>
+      <!-- Data 1 Options -->
+      <div class="col-md-2">
+        <div class="well">
+          <h5>Dementia Status (Data 1):</h5>
+          <select id="selDatasetData" onchange="optionChangedData(this.value)"></select>
+        </div>
+      </div>
+
+      <!-- Vis1 and Vis2 for Data 1 -->
+      <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-12">
+            <div id="vis1"></div>
+          </div>
+          <div class="col-md-12">
+            <div id="vis2"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
