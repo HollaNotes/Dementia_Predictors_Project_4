@@ -5,16 +5,15 @@ const url2 = "https://cors-anywhere.herokuapp.com/https://dementia-data-2024-pro
 let data;  // Define first data variable 
 let data2;  // Define second data variable 
 
-
 // Fetch CSV data from the second URL
 d3.csv(url2, { header: "first" }).then(function (csvData2) {
     // console log the data 
     console.log(csvData2);
 
-    // Assign csvData2 to global data variable
+    // Assign csvData2 to the global data variable
     data2 = csvData2;
 
-    // Initialize the dropdown menu
+    // Initialize the dropdown menu for Data 2 (Group)
     initGroupDropdown();
 
     // Fetch CSV data from the first URL
@@ -35,27 +34,22 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
             turnNumeric.Dementia = +turnNumeric.Dementia;
         });
 
-        // Assign csvData to global data variable
+        // Assign csvData to the global data variable
         data = csvData;
 
-        // Initialize the dropdown menu
+        // Initialize the dropdown menu for Data 1 (Dementia)
         init();
 
-        // Call the updateScatter function
+        // Call the updateScatter function after data is loaded
         updateScatter();
-        //Call vis1/vis2 functions
+        //call vis1/vis2
         vis1()
         vis2()
     });
-
-
-    init();
-
 });
 
-// Dropdown menu for Data 1 
+// Dropdown menu for Data 1 (Dementia)
 function init() {
-
     // Get unique values from the "Dementia" column in data
     let uniqueDementiaStatusData = [...new Set(data.map(d => d.Dementia))];
     let dropdownMenuData = d3.select('#selDatasetData');
@@ -64,30 +58,30 @@ function init() {
     let uniqueGroupValues = [...new Set(data2.map(d => d.Group))];
     let dropdownMenuGroup = d3.select('#selDatasetGroup');
 
-    // Clear existing options 
+    // Clear existing options for both dropdowns
     dropdownMenuData.html("");
     dropdownMenuGroup.html("");
 
-    // Get original Dementia values and map to "Not Demented" or "Demented"
+    // Get original Dementia values mapping to "Not Demented" or "Demented"
     const dementiaMapping = {
         0: "Not Demented",
         1: "Demented"
     };
 
-    // Get original Group values and map to "Not Demented" or "Demented"
+    // Get original Group values mapping to "Not Demented" or "Demented"
     const groupMapping = {
         "0": "Not Demented",
         "1": "Demented"
     };
 
-    // Options for Data 1 dropdown
+    // Populate options for Data 1 (Dementia) dropdown
     uniqueDementiaStatusData.forEach(status => {
         dropdownMenuData.append("option")
             .text(dementiaMapping[status])
             .property("value", status);
     });
 
-    // Options for Data 2 dropdown
+    // Populate options for Data 2 (Group) dropdown
     uniqueGroupValues.forEach(group => {
         dropdownMenuGroup.append("option")
             .text(groupMapping[group])
@@ -95,7 +89,7 @@ function init() {
     });
 }
 
-// Dropdown menu for Data 2 
+// Dropdown menu for Data 2 (Group)
 function initGroupDropdown() {
     // Get unique values from the "Group" column in data2
     let uniqueGroups = [...new Set(data2.map(d => d.Group))];
@@ -120,8 +114,6 @@ function initGroupDropdown() {
     });
 }
 
-   
-
 // Option changed for Data 1 (Dementia)
 function optionChangedData(value) {
     console.log(value);
@@ -133,23 +125,23 @@ function optionChangedData(value) {
 function optionChangedGroup(value) {
     console.log(value);
 
-    // Filter data2 from selected group value
+    // Filter data2 based on the selected group value
     const filteredData = data2.filter(d => d.Group === value);
 
-    // Update the scatter plot 
+    // Update the scatter plot with the filtered data
     updateScatter(filteredData);
 }
 
-
-
+// Scatter plot update function
+// Scatter plot update function
 function updateScatter(filteredData) {
     // Select the container for the scatter plot
     const scatterContainer = d3.select("#scatter");
 
-    // Clear existing content 
+    // Clear any existing content 
     scatterContainer.html("");
 
-    // Get CDR scores and ages from dataset
+    // Get CDR scores and ages from all data
     const cdrScores = data2.map(d => d.CDR);
     const ages = data2.map(d => d.Age);
 
@@ -164,8 +156,7 @@ function updateScatter(filteredData) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    //Add title
+        
     svg.append("text")
         .attr("x", (width / 2))
         .attr("y", 0 - (margin.top / 2))
@@ -228,10 +219,9 @@ function updateScatter(filteredData) {
             .attr("cx", d => xScale(d.Age))
             .attr("cy", d => yScale(d.CDR))
             .attr("r", 5)
-            .style("fill", "purple");  
+            .style("fill", "purple");  // Set the color for selected data points, you can customize this
     }
 }
-
 
 
 function vis1(selectedDementiaStatus) {
@@ -262,14 +252,10 @@ function vis1(selectedDementiaStatus) {
         y: countsArray,
         text: Cognitive_Test_Scores, // Set custom hover text
         hoverinfo: "x+y",  // Show custom text and x-value in hover info
-
         type: 'bar', 
         marker: {
             color: 'purple'
         }
-
-        type: 'bar'
-
     };
 
     // Data array
@@ -328,14 +314,10 @@ function vis2(selectedDementiaStatus) {
         y: countsArray,
         text: Depression_Status, // Set custom hover text
         hoverinfo: "x+y",  // Show custom text and x-value in hover info
-
         type: 'bar', 
         marker: {
             color: '#e75480'
         }
-
-        type: 'bar'
-
     };
 
     // Data array
@@ -363,9 +345,5 @@ function vis2(selectedDementiaStatus) {
 
     // Update the existing graph or create a new one
     Plotly.newPlot("vis2", plotData, layout);
-
 }
-
-
-
 
