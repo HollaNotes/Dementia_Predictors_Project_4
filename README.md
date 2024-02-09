@@ -1,15 +1,20 @@
 <h1>Dementia_Predictors</h1>
-<h2>Project 4 - Hansel Goh, Dumiduni Geeganage, Noelle Watson</h2>
+<h2>Project 4 - Hansle Goh, Dumiduni Geeganage, Noelle Watson</h2>
 
 <p style="text-align: center"><img src="https://neurosciencenews.com/files/2023/11/personality-dementia-neurosicence.jpg"></p>
 
 **Goal**:
 Our goal was to create a Dementia Prediction Model based on a dataset containing various health parameters and history.
 
+<<<<<<< HEAD
 - *Dataset used*:
 https://www.kaggle.com/datasets/kaggler2412/dementia-patient-health-and-prescriptions-dataset/data
+=======
+Dataset used: [Kaggle - Dementia patient health dataset](https://www.kaggle.com/datasets/kaggler2412/dementia-patient-health-and-prescriptions-dataset/data)
+>>>>>>> c4d8d93c252491d8a92cb926eea2dd871ef5d0c0
 
 
+<<<<<<< HEAD
 Method:
 - Initial exploration:  
   - A Jupyter Notebook was created which utilized Pandas to read in our data and perform initial searches on our data
@@ -60,19 +65,42 @@ Method:
   
   
  
+=======
+Group Members:
+- Hansle Goh
+- Dumiduni Geeganage
+- Noelle Watson
+>>>>>>> c4d8d93c252491d8a92cb926eea2dd871ef5d0c0
 
 Folder Contents:
 - Notebooks:
+    - [First modeling notebook with all features](Classification-Models/dementia_modeling.ipynb)
+    - [Second modeling notebook without *Cognitive_Test_Scores* feature](Classification-Models/dementia_modeling_no_cognitive_test.ipynb)
 - API:
 - ETC..........
 
+<<<<<<< HEAD
+=======
+Method:
+- Read in dataset and do initial exploration
+- Create dashboard
+- Create predictive models
+    - Deep learning model
+    - Random forest model
+    - Logistic regression model
+- Put into PySpark
+- 
+
+>>>>>>> c4d8d93c252491d8a92cb926eea2dd871ef5d0c0
 Predictors:
 - Dementia (Target)
 
 Insights:
+- 
 
-
-
-
-
-
+### References
+- [Show all column names](https://stackoverflow.com/questions/49188960/how-to-show-all-columns-names-on-a-large-pandas-dataframe)
+- [Save Keras model summary](https://stackoverflow.com/questions/45199047/how-to-save-model-summary-to-file-in-keras)
+- [Keras tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner)
+- [Feature importance in random forests](https://forecastegy.com/posts/feature-importance-in-random-forests/)
+- *random_forest_solution.ipynb*
