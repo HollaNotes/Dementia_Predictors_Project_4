@@ -219,7 +219,7 @@ function updateScatter(filteredData) {
             .attr("cx", d => xScale(d.Age))
             .attr("cy", d => yScale(d.CDR))
             .attr("r", 5)
-            .style("fill", "purple");  // Set the color for selected data points, you can customize this
+            .style("fill", "purple");  
     }
 }
 
