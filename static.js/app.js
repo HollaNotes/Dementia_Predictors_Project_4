@@ -5,6 +5,7 @@ const url2 = "https://cors-anywhere.herokuapp.com/https://dementia-data-2024-pro
 let data;  // Define first data variable 
 let data2;  // Define second data variable 
 
+
 // Fetch CSV data from the second URL
 d3.csv(url2, { header: "first" }).then(function (csvData2) {
     // console log the data 
@@ -46,10 +47,15 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
         vis1()
         vis2()
     });
+
+
+    init();
+
 });
 
 // Dropdown menu for Data 1 
 function init() {
+
     // Get unique values from the "Dementia" column in data
     let uniqueDementiaStatusData = [...new Set(data.map(d => d.Dementia))];
     let dropdownMenuData = d3.select('#selDatasetData');
@@ -113,6 +119,8 @@ function initGroupDropdown() {
         }
     });
 }
+
+   
 
 // Option changed for Data 1 (Dementia)
 function optionChangedData(value) {
@@ -225,6 +233,7 @@ function updateScatter(filteredData) {
 }
 
 
+
 function vis1(selectedDementiaStatus) {
     // Filter data based on selectedDementiaStatus
     let filteredData;
@@ -253,10 +262,14 @@ function vis1(selectedDementiaStatus) {
         y: countsArray,
         text: Cognitive_Test_Scores, // Set custom hover text
         hoverinfo: "x+y",  // Show custom text and x-value in hover info
+
         type: 'bar', 
         marker: {
             color: 'purple'
         }
+
+        type: 'bar'
+
     };
 
     // Data array
@@ -315,10 +328,14 @@ function vis2(selectedDementiaStatus) {
         y: countsArray,
         text: Depression_Status, // Set custom hover text
         hoverinfo: "x+y",  // Show custom text and x-value in hover info
+
         type: 'bar', 
         marker: {
             color: '#e75480'
         }
+
+        type: 'bar'
+
     };
 
     // Data array
@@ -346,5 +363,9 @@ function vis2(selectedDementiaStatus) {
 
     // Update the existing graph or create a new one
     Plotly.newPlot("vis2", plotData, layout);
+
 }
+
+
+
 
