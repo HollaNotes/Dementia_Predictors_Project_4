@@ -36,9 +36,11 @@ Predictors:
 - Dementia (Target)
 
 Insights:
+- 
 
-
-
-
-
-
+### References
+- [Show all column names](https://stackoverflow.com/questions/49188960/how-to-show-all-columns-names-on-a-large-pandas-dataframe)
+- [Save Keras model summary](https://stackoverflow.com/questions/45199047/how-to-save-model-summary-to-file-in-keras)
+- [Keras tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner)
+- [Feature importance in random forests](https://forecastegy.com/posts/feature-importance-in-random-forests/)
+- *random_forest_solution.ipynb*
