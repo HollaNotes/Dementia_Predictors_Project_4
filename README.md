@@ -1,5 +1,5 @@
 <h1>Dementia_Predictors</h1>
-<h2>Project 4 - Hansel Goh, Dumiduni Geeganage, Noelle Watson</h2>
+<h2>Project 4 - Hansle Goh, Dumiduni Geeganage, Noelle Watson</h2>
 
 Background:
 
@@ -12,7 +12,7 @@ https://www.kaggle.com/datasets/kaggler2412/dementia-patient-health-and-prescrip
 Dependencies:
 
 Group Members:
-- Hansel Goh
+- Hansle Goh
 - Dumiduni Geeganage
 - Noelle Watson
 
