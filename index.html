@@ -26,22 +26,6 @@
     </div>
 
     <div class="row">
-      <!-- Data 2 Options -->
-      <div class="col-md-2">
-        <div class="well">
-          <h5>Group (Data 2):</h5>
-          <select id="selDatasetGroup" onchange="optionChangedGroup(this.value)"></select>
-        </div>
-      </div>
-
-      <!-- Scatter Plot for Data 2 -->
-      <div class="col-md-5">
-        <div id="scatter"></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <!-- Data 1 Options -->
       <div class="col-md-2">
         <div class="well">
           <h5>Dementia Status (Data 1):</h5>
@@ -49,16 +33,33 @@
         </div>
       </div>
 
-      <!-- Vis1 and Vis2 for Data 1 -->
+
       <div class="col-md-5">
-        <div class="row">
-          <div class="col-md-12">
-            <div id="vis1"></div>
-          </div>
-          <div class="col-md-12">
-            <div id="vis2"></div>
-          </div>
+        <div id="vis1"></div>
+      </div>
+      <div class="col-md-5">
+        <div id="vis2"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div id="scatter"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-8 text-center">
+        <div class="well">
+          <h5>Dementia Status (Data 2):</h5>
+          <select id="selDatasetGroup" onchange="optionChangedGroup(this.value)"></select>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div id="scatter_2"></div>
       </div>
     </div>
   </div>
