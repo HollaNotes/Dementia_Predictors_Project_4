@@ -71,8 +71,36 @@ Folder Contents:
 Predictors:
 - Dementia (Target)
 
-Insights:
-- 
+# Insights:
+
+## Data 2 
+
+- Because cognitive tests were not specified in the original dataset we chose, we also looked at a dataset where the specific cognitive tests used were specified among other factors of interest in predicting dementia. 
+- We created a random forest model for this dataset to predict dementia status because it can deal with non-linearity and dementia might not have linear relationships with the predictor variables, we can see the feature importance 
+
+First we created a random forest model to predict dementia with the following as predictor variables: 
+- Magnetic Resonance (MR) Delay
+- Gender (Male/Female)
+- Age
+- Education Level 
+- Socioeconomic Status (SES)
+- Clinical Dementia Rating (CDR) Scale
+- Mini Mental State Exam (MMSE)
+- Estimated Total Intracranial Volume (eTIV)
+- Normalized Whole Brain Volume (nWBV)
+- Atlas Scaling Factor (ASF)
+
+The model demonstrated a 100% accuracy in predicting dementia with the rating scales like CDR and MMSE being the biggest predictors of Dementia. 
+
+We examined the CDR and found the scale may be highly predictive of dementia as it uses information from the patient as well as an informant to establish a comprehensive assessment of an individuals ability to cognitively function as well as perform activities of daily living. 
+
+We thought this might be a case of feature engineering where the difference in rating scale scores between demented and non-demented individuals are very different and the model uses this to get a 100% accuracy. This is seen in the scatter plot for CDR scores between demented and non-demented individuals where the difference is very dramatic. 
+
+Thus, we decided to remove the rating scales as predictor variables and run the random forest model again. This time, the accuracy of the random forest model dropped to 82%. The biggest predictor of Dementia was normalized whole brain volume (nWBV).
+
+nWBV can be predictive of dementia because dementia is characterized by neurodegenerative processes in the brain that can lead to neuronal loss and reduce the overall size of the brain. Thus we would expect the average demented individual have less whole brain volume than the average non-demented individual which is true when we calculate the average with the demented individuals having an average nWBV of 0.72 and non-demented individuals having an average nWBV of 0.74.
+
+The scatter plot between demented and non-demented individuals also shows this because the clustering of nWBV for demented individuals is lower than the clustering for non-demented individuals. 
 
 ### References
 - [Show all column names](https://stackoverflow.com/questions/49188960/how-to-show-all-columns-names-on-a-large-pandas-dataframe)
