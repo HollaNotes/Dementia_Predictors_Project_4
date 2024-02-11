@@ -136,6 +136,16 @@ function optionChangedGroup(value) {
     updateScatter_nWBV_Age(filteredData);
 }
 
+//Calculate average nWBV for a each Dementia Status
+function calculateAverage_nWBV(group) {
+    // Filter data based on the selected group
+    const filteredData = data2.filter(d => d.Group === group);
+
+    // Calculate the average nWBV
+    const average_nWBV = d3.mean(filteredData, d => d.nWBV);
+
+    return average_nWBV;
+}
 
 // Scatter plot update function
 function updateScatter(filteredData) {
@@ -231,6 +241,9 @@ function updateScatter(filteredData) {
 function updateScatter_nWBV_Age(filteredData) {
     // Select the container for the scatter plot
     const scatterContainer = d3.select("#scatter_2");
+    // Calculate average nWBV for Demented and Non-Demented
+    const average_nWBV_Demented = calculateAverage_nWBV("1"); 
+    const average_nWBV_NonDemented = calculateAverage_nWBV("0"); 
 
     // Clear any existing content 
     scatterContainer.html("");
@@ -259,7 +272,7 @@ function updateScatter_nWBV_Age(filteredData) {
         .style("font-size", "16px")
         .style("text-decoration", "underline")
         .text("Scatter Plot of nWBV vs Age");
-
+        
     // Add scales 
     const xScale = d3.scaleLinear()
         .domain([50, 100])
@@ -268,6 +281,21 @@ function updateScatter_nWBV_Age(filteredData) {
     const yScale = d3.scaleLinear()
         .domain([0.6, d3.max(nWBVValues)])
         .range([height, 0]);
+
+    // Display average nWBV 
+    svg.append("text")
+        .attr("x", width * 0.6)
+        .attr("y", yScale(average_nWBV_Demented) * 0.25)
+        .text(`Avg nWBV (Demented): ${average_nWBV_Demented.toFixed(2)}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+
+    svg.append("text")
+        .attr("x", width * 0.6)
+        .attr("y", yScale(average_nWBV_NonDemented) * 0.20)
+        .text(`Avg nWBV (Non-Demented): ${average_nWBV_NonDemented.toFixed(2)}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
 
     // Add dots 
     svg.selectAll("circle")
@@ -316,6 +344,7 @@ function updateScatter_nWBV_Age(filteredData) {
             .style("fill", "purple");  
     }
 }
+
 
 
 function vis1(selectedDementiaStatus) {
