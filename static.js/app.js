@@ -37,7 +37,7 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
         // Assign csvData to the global data variable
         data = csvData;
 
-        // Initialize the dropdown menu for Data 1 
+        // Initialize the dropdown menu
         init();
 
         // Call the updateScatter function after data is loaded
@@ -45,6 +45,9 @@ d3.csv(url2, { header: "first" }).then(function (csvData2) {
         //call vis1/vis2
         vis1()
         vis2()
+
+        // Call scatter plot for nWBV and Age
+        updateScatter_nWBV_Age();
     });
 });
 
@@ -130,8 +133,19 @@ function optionChangedGroup(value) {
 
     // Update the scatter plot with filtered data
     updateScatter(filteredData);
+    updateScatter_nWBV_Age(filteredData);
 }
 
+//Calculate average nWBV for a each Dementia Status
+function calculateAverage_nWBV(group) {
+    // Filter data based on the selected group
+    const filteredData = data2.filter(d => d.Group === group);
+
+    // Calculate the average nWBV
+    const average_nWBV = d3.mean(filteredData, d => d.nWBV);
+
+    return average_nWBV;
+}
 
 // Scatter plot update function
 function updateScatter(filteredData) {
@@ -166,23 +180,23 @@ function updateScatter(filteredData) {
         .style("text-decoration", "underline")
         .text("Scatter Plot of CDR Scores vs Age");
 
-    // Add scales for x and y axes
+    // Add scales 
     const xScale = d3.scaleLinear()
-        .domain([40, 100])
+        .domain([50, 100])
         .range([0, width]);
 
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(cdrScores)])
         .range([height, 0]);
 
-    // Add dots for all data points
+    // Add dots 
     svg.selectAll("circle")
         .data(data2)
         .enter().append("circle")
         .attr("cx", d => xScale(d.Age))
         .attr("cy", d => yScale(d.CDR))
         .attr("r", 5)
-        .style("fill", "#e75480");  
+        .style("fill", "#F2439D");  
 
     // Add x-axis
     svg.append("g")
@@ -209,8 +223,7 @@ function updateScatter(filteredData) {
 
     // Check if filteredData is not empty
     if (filteredData && filteredData.length > 0) {
-        // If a value is selected, update the scatter plot with the filtered data
-        // Remove existing dots
+        // If a value is selected, update the scatter plot with the filtered data and remove selected dots
         svg.selectAll("circle").remove();
 
         // Add dots for the selected data points
@@ -223,6 +236,115 @@ function updateScatter(filteredData) {
             .style("fill", "purple");  
     }
 }
+
+// Scatter plot for nWBV and Age
+function updateScatter_nWBV_Age(filteredData) {
+    // Select the container for the scatter plot
+    const scatterContainer = d3.select("#scatter_2");
+    // Calculate average nWBV for Demented and Non-Demented
+    const average_nWBV_Demented = calculateAverage_nWBV("1"); 
+    const average_nWBV_NonDemented = calculateAverage_nWBV("0"); 
+
+    // Clear any existing content 
+    scatterContainer.html("");
+
+    // Get nWBV values and ages from dataset
+    const nWBVValues = (filteredData || data2).map(d => d.nWBV);
+    const ages = (filteredData || data2).map(d => d.Age);
+
+    // Add dimensions
+    const margin = { top: 60, right: 20, bottom: 30, left: 40 };
+    const width = 600 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    // Append to page
+    const svg = scatterContainer.append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // Add title    
+    svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Scatter Plot of nWBV vs Age");
+        
+    // Add scales 
+    const xScale = d3.scaleLinear()
+        .domain([50, 100])
+        .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+        .domain([0.6, d3.max(nWBVValues)])
+        .range([height, 0]);
+
+    // Display average nWBV 
+    svg.append("text")
+        .attr("x", width * 0.6)
+        .attr("y", yScale(average_nWBV_Demented) * 0.25)
+        .text(`Avg nWBV (Demented): ${average_nWBV_Demented.toFixed(2)}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+
+    svg.append("text")
+        .attr("x", width * 0.6)
+        .attr("y", yScale(average_nWBV_NonDemented) * 0.20)
+        .text(`Avg nWBV (Non-Demented): ${average_nWBV_NonDemented.toFixed(2)}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+
+    // Add dots 
+    svg.selectAll("circle")
+        .data(filteredData || data2) 
+        .enter().append("circle")
+        .attr("cx", d => xScale(d.Age))
+        .attr("cy", d => yScale(d.nWBV))
+        .attr("r", 5)
+        .style("fill", "#F2439D");  
+
+    // Add x-axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xScale));
+
+    // Add y-axis
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+    // Add labels
+    svg.append("text")
+        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 10) + ")")
+        .style("text-anchor", "middle")
+        .text("Age");
+
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("nWBV");
+
+     // Check if filteredData is not empty
+     if (filteredData && filteredData.length > 0) {
+        // If a value is selected, update the scatter plot with the filtered data and remove selected dots
+        svg.selectAll("circle").remove();
+
+        // Add dots for the selected data points
+        svg.selectAll("circle")
+            .data(filteredData)
+            .enter().append("circle")
+            .attr("cx", d => xScale(d.Age))
+            .attr("cy", d => yScale(d.nWBV))
+            .attr("r", 5)
+            .style("fill", "purple");  
+    }
+}
+
 
 
 function vis1(selectedDementiaStatus) {
