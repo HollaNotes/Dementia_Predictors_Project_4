@@ -114,6 +114,40 @@ Predictors:
 
 # Insights:
 
+## Data 1 - Dementia Patient Health and Prescription Dataset
+
+After preprocessing the data and selecting the dementia column as the target variable, we attempted three approaches to predict dementia with the given features: deep learning model, random forest model, and logistic regression model.
+
+The deep learning model was created through Keras and trained with the tuner to obtain the best hyperparameters.
+- Within 60 trials, the tuner search resulted in a model with an accuracy of 100% and loss of 0.018.
+- The top three models all consisted of a leaky relu activation function for hidden layers and a sigmoid activation function for the output layer.
+- The top model was trained separately and evaluated using the test data, and its accuracy was 99.20% with a loss of 0.024.
+- With a high accuracy and a low loss, this deep learning model was ideal and confident in predicting dementia in a given patient.
+
+However, a random forest model was also attempted to challenge the looming question of an overfitted model.
+- This model achieved an accuracy, precision, and recall of 100% with seemingly no room for error.
+- The confusion matrix illustrated that the model had no type I or type II errors.
+- Cognitive test scores scored the highest in feature importance at 0.592 while depression status was next at 0.136, a sizable gap between the two.
+- The type of diet had minimal importance in this random forest model and heart disease was the least important feature.
+- SHAP, a method based on cooperative game theory and used to increase transparency and interpretability of machine learning models, was graphed to uncover additional information about feature importance.
+  - Cognitive test scores were inversely related to the model output, as lower scores are more likely to lead to a diagnosis of dementia.
+  - Current smokers were also inversely related to the model output while former smokers were not, which indicate that a history of smoking leans more towards a diagnosis of dementia and current smokers lean the opposite way.
+  - This can also provide further insight that although smoking early on might not have large impacts to a patient's health, the history of smoking can have detrimental health effects in the future.
+
+Finally, a logistic regression model was created and tested as an extra measure to predict dementia.
+- This model achieved an accuracy of 98.8%, which is still significant as a model performance.
+- There were three false negatives, or type II errors, displayed in the confusion matrix.
+
+Going back to the feature importance, since cognitive test scores' importance was relatively higher than the rest, we created another notebook and removed that feature to test the models without it.
+- The best deep learning model from the tuner had an accuracy of 80.80% and a loss of 0.4415, which is significantly lower than the ones from the first model.
+- The random forest model resulted in an accuracy of 74.00% with significantly higher type I and type II values in the confusion matrix.
+  - The feature importance was relatively unchanged, which indicates that cognitive test scores are important in evaluating a patient for dementia.
+  - Likewise, the SHAP values demonstrated similar patterns as to the ones from the first model.
+- The logistic regression model provided a similar accuracy to the random forest model at 74.40% with many type I and type II errors.
+
+In conclusion, the first deep learning and random forest models were the most significant with accuracies of 100% and minimal loss. The logistic regression model was also effective in predicting dementia for a given patient, but it demonstrated a few type II errors. From the random forest model, we can conclude that cognitive test scores are a key feature in predicting dementia. Without the feature, all three models failed to reach an accuracy of 85%, so they cannot effectively predict dementia. 
+
+
 ## Data 2 
 
 - Because cognitive tests were not specified in the original dataset we chose, we also looked at a dataset where the specific cognitive tests used were specified among other factors of interest in predicting dementia. 
