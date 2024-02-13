@@ -1,15 +1,56 @@
 <h1>Dementia_Predictors</h1>
 <h2>Project 4 - Hansle Goh, Dumiduni Geeganage, Noelle Watson</h2>
 
-<p style="text-align: center"><img src="https://neurosciencenews.com/files/2023/11/personality-dementia-neurosicence.jpg"></p>
+<p style="text-align: center"><img src="https://openmedscience.com/wp-content/uploads/2023/04/Alzheimers-Disease-scaled.jpeg"></p>
 
-**Goal**:
+**<h3>Table of Contents:</h3>**
+--
+
+**<h3>Introduction:</h3>**
+--
+
+
+**<h3>Project Description:</h3>**
+--
 Our goal was to create a Dementia Prediction Model based on a dataset containing various health parameters and history.
 
-- *Dataset used*:
-https://www.kaggle.com/datasets/kaggler2412/dementia-patient-health-and-prescriptions-dataset/data
+**<h3>Data Sources:</h3>**
+--
+  - [Dataset 1 - Dementia Patient Health and Prescription Dataset](https://www.kaggle.com/datasets/kaggler2412/dementia-patient-health-and-prescriptions-dataset/data)
+  - [Dataset 2 - Classification and Prediction of Dementia by SVM](https://data.mendeley.com/datasets/tsy6rbc5d4/1)
+  - [Dataset 3 - Alzheimer MRI Images](https://www.kaggle.com/datasets/yasserhessein/dataset-alzheimer?rvi=1)
+
+**<h3>Code and Structure:</h3>**
+--
+- Notebooks:
+    - [First modeling notebook with all features](Classification-Models/dementia_modeling.ipynb)
+    - [Second modeling notebook without *Cognitive_Test_Scores* feature](Classification-Models/dementia_modeling_no_cognitive_test.ipynb)
+- API:
+
+**<h3>Results and Evaluation:</h3>**
+--
 
 
+**<h3>Future Work:</h3>**
+--
+
+
+**<h3>References:</h3>**
+--
+- [Show all column names](https://stackoverflow.com/questions/49188960/how-to-show-all-columns-names-on-a-large-pandas-dataframe)
+- [Save Keras model summary](https://stackoverflow.com/questions/45199047/how-to-save-model-summary-to-file-in-keras)
+- [Keras tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner)
+- [Feature importance in random forests](https://forecastegy.com/posts/feature-importance-in-random-forests/)
+- *random_forest_solution.ipynb*
+- [How to set up an image classification model with your own data](https://medium.com/@ericdnbn/how-to-import-images-into-a-jupyter-notebook-using-keras-in-3-steps-2b100b18238c)
+- [Plotting graphs on image classifier](https://medium.com/analytics-vidhya/how-to-do-image-classification-on-custom-dataset-using-tensorflow-52309666498e)
+
+
+
+
+
+
+------------------------------------------------------------------------
 Method:
 - Initial exploration:  
   - A Jupyter Notebook was created which utilized Pandas to read in our data and perform initial searches on our data
