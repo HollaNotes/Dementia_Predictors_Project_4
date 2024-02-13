@@ -143,9 +143,9 @@ The scatter plot between demented and non-demented individuals also shows this b
 - [Keras tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner)
 - [Feature importance in random forests](https://forecastegy.com/posts/feature-importance-in-random-forests/)
 - *random_forest_solution.ipynb*
+- [SHAP values](https://towardsdatascience.com/using-shap-values-to-explain-how-your-machine-learning-model-works-732b3f40e137)
 - [Markdown-Table of contents](https://www.eddymens.com/blog/markdown-table-of-contents-toc-how-to-create-one)
 - [Template for slides](https://slidesgo.com/)
-- 
 
 
 
