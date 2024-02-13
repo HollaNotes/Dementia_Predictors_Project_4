@@ -4,8 +4,15 @@
 <p style="text-align: center"><img src="https://openmedscience.com/wp-content/uploads/2023/04/Alzheimers-Disease-scaled.jpeg"></p>
 
 ## Table of Contents:
+- [Introduction](#item-one)
+- [Project Description](#item-two)
+- [Data Sources](#item-three)
+- [Code and Structure](#item-four)
+- [Insights](#item-five)
+- [References](#item-six)
 
 
+<a id="item-one"></a>
 ## Introduction:
 
 **What is Dementia?**
@@ -17,7 +24,7 @@ Alzheimer’s disease is the most common type of dementia. Though dementia mostl
 
 Can we use machine learning models such as logistic regression, random forests, and deep learning to predict dementia?
 
-
+<a id="item-two"></a>
 ## Project Description:
 
 - **Data collection**
@@ -43,13 +50,13 @@ Can we use machine learning models such as logistic regression, random forests, 
   - SHAP Values
   - Feature Importances
 
-
+<a id="item-three"></a>
 ## Data Sources:
 
   - [Dataset 1 - Dementia Patient Health and Prescription Dataset](https://www.kaggle.com/datasets/kaggler2412/dementia-patient-health-and-prescriptions-dataset/data)
   - [Dataset 2 - Classification and Prediction of Dementia by SVM](https://data.mendeley.com/datasets/tsy6rbc5d4/1)
   
-
+<a id="item-four"></a>
 ## Code and Structure:
 
 - Notebooks:
@@ -61,7 +68,7 @@ Can we use machine learning models such as logistic regression, random forests, 
   - [app.js](\static.js\app.js)
 
 
-
+<a id="item-five"></a>
 ## Insights:
 
 ### *Data 1 - Dementia Patient Health and Prescription Dataset*
@@ -128,7 +135,7 @@ nWBV can be predictive of dementia because dementia is characterized by neurodeg
 The scatter plot between demented and non-demented individuals also shows this because the clustering of nWBV for demented individuals is lower than the clustering for non-demented individuals. 
 
 
-
+<a id="item-six"></a>
 ## References:
 
 - [Show all column names](https://stackoverflow.com/questions/49188960/how-to-show-all-columns-names-on-a-large-pandas-dataframe)
@@ -136,8 +143,9 @@ The scatter plot between demented and non-demented individuals also shows this b
 - [Keras tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner)
 - [Feature importance in random forests](https://forecastegy.com/posts/feature-importance-in-random-forests/)
 - *random_forest_solution.ipynb*
-- [How to set up an image classification model with your own data](https://medium.com/@ericdnbn/how-to-import-images-into-a-jupyter-notebook-using-keras-in-3-steps-2b100b18238c)
-- [Plotting graphs on image classifier](https://medium.com/analytics-vidhya/how-to-do-image-classification-on-custom-dataset-using-tensorflow-52309666498e)
+- [Markdown-Table of contents](https://www.eddymens.com/blog/markdown-table-of-contents-toc-how-to-create-one)
+- [Template for slides](https://slidesgo.com/)
+- 
 
 
 
