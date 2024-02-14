@@ -147,6 +147,9 @@ The scatter plot between demented and non-demented individuals also shows this b
 - [Markdown-Table of contents](https://www.eddymens.com/blog/markdown-table-of-contents-toc-how-to-create-one)
 - [Template for slides](https://slidesgo.com/)
 - [Changing colors of graph once clicked](https://chat.openai.com/c/3297e3d5-6c5a-42d7-a5e5-a0c96b8cf7ac)
+- [Building a Scatterplot JavaScript](https://d3-graph-gallery.com/graph/scatter_basic.html)
+- [GroupBy JavaScript](https://stackoverflow.com/questions/40774697/how-can-i-group-an-array-of-objects-by-key)
+- [Objects by Keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
 
 
 
