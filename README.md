@@ -67,7 +67,7 @@ Can we use machine learning models such as logistic regression, random forests, 
   - Steps to access dashboard:
     - Click each link below to allow access to the dashboard. You must click these in order to open the dashboard:
       - [Click here 1](https://cors-anywhere.herokuapp.com/https://github.com/HollaNotes/Dementia_Predictors_Project_4/raw/0d36b56ace517b8557d32518ecb598aa494b908f/Resources/dementia_patients_health_data.csv)
-      - [Click here 2 ]("https://cors-anywhere.herokuapp.com/https://dementia-data-2024-project-4.s3.us-west-2.amazonaws.com/cleaned_dementia_with_rating_scales.csv)
+      - [Click here 2 ](https://cors-anywhere.herokuapp.com/https://dementia-data-2024-project-4.s3.us-west-2.amazonaws.com/cleaned_dementia_with_rating_scales.csv)
   - [Index.html](\index.html)
   - [app.js](\static.js\app.js)
 
