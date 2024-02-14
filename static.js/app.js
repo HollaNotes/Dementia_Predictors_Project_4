@@ -77,6 +77,7 @@ function init() {
         "1": "Demented"
     };
 
+
     // Populate options for Data 1 (Dementia) dropdown
     uniqueDementiaStatusData.forEach(status => {
         dropdownMenuData.append("option")
@@ -120,8 +121,8 @@ function initGroupDropdown() {
 // Option changed for Data 1 
 function optionChangedData(value) {
     console.log(value);
-    vis1(value);
-    vis2(value);
+    vis1(value, true);
+    vis2(value, true);
 };
 
 // Option changed for Data 2 
@@ -347,7 +348,7 @@ function updateScatter_nWBV_Age(filteredData) {
 
 
 
-function vis1(selectedDementiaStatus) {
+function vis1(selectedDementiaStatus, turnPurple = false) {
     // Filter data based on selectedDementiaStatus
     let filteredData;
     if (selectedDementiaStatus !== undefined) {
@@ -368,6 +369,9 @@ function vis1(selectedDementiaStatus) {
     let scoresArray = Object.keys(count_scores).map(score => parseFloat(score));
     let countsArray = Object.values(count_scores);
 
+    // Apply color based on init or value change
+    const color = turnPurple ? 'purple' : "#F2439D";
+
 
     // Create trace for Plotly with custom hover text
     var trace1 = {
@@ -377,7 +381,7 @@ function vis1(selectedDementiaStatus) {
         hoverinfo: "x+y",  // Show custom text and x-value in hover info
         type: 'bar', 
         marker: {
-            color: 'purple'
+            color: color
         }
     };
 
@@ -401,7 +405,9 @@ function vis1(selectedDementiaStatus) {
         },
         yaxis: {
             title: 'Count'
-        }
+        },
+        paper_bgcolor: "transparent",
+        plot_bgcolor: "transparent",
     };
 
     // Update the existing graph or create a new one
@@ -409,7 +415,7 @@ function vis1(selectedDementiaStatus) {
 }
 
 
-function vis2(selectedDementiaStatus) {
+function vis2(selectedDementiaStatus, turnPurple = false) {
     // Filter data based on selectedDementiaStatus
     let filteredData;
     if (selectedDementiaStatus !== undefined) {
@@ -430,6 +436,9 @@ function vis2(selectedDementiaStatus) {
     let statusesArray  = Object.keys(count_statuses);
     let countsArray  = Object.values(count_statuses);
 
+    // Apply color based on init or value change
+    const color = turnPurple ? 'purple' : "#F2439D";
+
 
     // Create trace for Plotly with custom hover text
     var trace1 = {
@@ -439,7 +448,7 @@ function vis2(selectedDementiaStatus) {
         hoverinfo: "x+y",  // Show custom text and x-value in hover info
         type: 'bar', 
         marker: {
-            color: '#e75480'
+            color: color
         }
     };
 
@@ -463,7 +472,9 @@ function vis2(selectedDementiaStatus) {
         },
         yaxis: {
             title: 'Count'
-        }
+        },
+        paper_bgcolor: "transparent",
+        plot_bgcolor: "transparent",
     };
 
     // Update the existing graph or create a new one
